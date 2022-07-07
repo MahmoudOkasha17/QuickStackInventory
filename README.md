@@ -1,6 +1,6 @@
 # QuickStackInventory -
 
-_([view on RaftModding](https://www.raftmodding.com/api/v1/mods/quick-stack-inventory))_
+_([view on RaftModding](https://www.raftmodding.com/mods/quick-stack-inventory))_
 
 Open Any Storage then press 'y' , all items in your storage that you have in your inventory will get stacked into it
 
@@ -10,7 +10,8 @@ Before stacking:
 
 ![unstacked inventory](https://cdn.discordapp.com/attachments/777678837827371029/994646151976452096/unknown.png)
 
-After sorting:
+After stacking:
+
 ![stacked inventory](https://cdn.discordapp.com/attachments/777678837827371029/994646243366150204/unknown.png)
 
 ## Contributing
