@@ -23,9 +23,8 @@
 
 2.  Press  <kbd>  y  </kbd>  to transfer items.
 
-3.  All items that could fit into the <br>
-    storage container should have <br>
-    been transferred.
+3.  All items that could fit into the storage <br>
+    container should have been transferred.
 
 <br>
 <br>
