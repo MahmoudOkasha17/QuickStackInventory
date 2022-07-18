@@ -28,6 +28,7 @@
     been transferred.
 
 <br>
+<br>
 
 <div align = center>
 
@@ -50,9 +51,8 @@ this updated, feel free to add to it.
 
 ## Credits
 
-I referenced the work of the <br>
-**[SortingInventory]** mod to <br>
-get this done.
+I referenced the **[SortingInventory]** <br>
+mod to get the initial version working.
 
 <br>
 
