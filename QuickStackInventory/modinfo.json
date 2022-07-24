@@ -1,14 +1,14 @@
 {
-  "name": "QuickStackInventory",
-  "author": "Mahmoud Okasha",
-  "description": "Allows you to move item stacks from inventory to storages",
-  "version": "2.1",
-  "license": "GNU AGPLv3",
-  "icon": "icon.png",
-  "banner": "banner.jpg",
-  "gameVersion": "1.0",
-  "requiredByAllPlayers": false,
-  "updateUrl": "https://www.raftmodding.com/api/v1/mods/quick-stack-inventory/version.txt",
-  "isModPermanent": false,
-  "excludedFiles": []
+    "requiredByAllPlayers" : false ,
+    "isModPermanent" : false ,
+    "excludedFiles" : [] ,
+    "description" : "Allows you to quickly deposit your inventory to any storage container." ,
+    "gameVersion" : "1.0" ,
+    "updateUrl" : "https://www.raftmodding.com/api/v1/mods/quick-stack-inventory/version.txt" ,
+    "version" : "2.1" ,
+    "license" : "GNU AGPLv3" ,
+    "banner" : "banner.jpg" ,
+    "author" : "Mahmoud Okasha" ,
+    "name" : "QuickStackInventory" ,
+    "icon" : "icon.png"
 }
