@@ -67,7 +67,7 @@ public class QuickStackInventory : Mod {
             if(slot.IsEmpty)
                 continue;
 
-            dynamic item = slot.itemInstance;
+            var item = slot.itemInstance;
 
             if(IsItemInStorage(item,storage))
                 if(item.settings_Inventory.Stackable){
@@ -78,7 +78,7 @@ public class QuickStackInventory : Mod {
                     
                     foreach(Slot storageSlot in storage){
                         
-                        dynamic stack = storageSlot.itemInstance;
+                        var stack = storageSlot.itemInstance;
                         
                         if(storageSlot.IsEmpty)
                             continue;
