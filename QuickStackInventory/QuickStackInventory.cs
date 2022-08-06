@@ -4,36 +4,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class QuickStackInventory : Mod {
+public class QuickStackInventory : Mod
+{
 
-    public void Start(){
+    public void Start()
+    {
         Debug.Log("Mod QuickStackInventory has been loaded!");
     }
-    
-    public void OnModUnload(){
+
+    public void OnModUnload()
+    {
         Debug.Log("Mod QuickStackInventory has been unloaded!");
     }
-    
-    
+
+
     /*
      *  Check for transfer button being pressed.
      */
-    
-    public void Update(){
 
-        if(CanvasHelper.ActiveMenu != MenuType.Inventory)
+    public void Update()
+    {
+
+        if (CanvasHelper.ActiveMenu != MenuType.Inventory)
             return;
-            
-        if(Input.GetKeyDown(KeyCode.Y)){
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
 
             Network_Player player = RAPI.GetLocalPlayer();
-            
-            if(player == null)
+
+            if (player == null)
                 return;
-                
-            if(player.Inventory.secondInventory == null)
+
+            if (player.Inventory.secondInventory == null)
                 return;
-                
+
             transferItems(player);
         }
     }
@@ -43,56 +48,62 @@ public class QuickStackInventory : Mod {
      *  Transfer a players items into an opened storage container.
      */
 
-    private void transferItems(Network_Player player){
-        
+    private void transferItems(Network_Player player)
+    {
+
         PlayerInventory inventory = player.Inventory;
-        
+
         int hotslots = inventory.hotslotCount;
 
         List<Slot> nonHotbar = inventory.allSlots
-            .GetRange( hotslots , inventory.allSlots.Count - hotslots );
+            .GetRange(hotslots, inventory.allSlots.Count - hotslots);
 
-        transferInventory(nonHotbar,inventory.secondInventory.allSlots);
+        transferInventory(nonHotbar, inventory.secondInventory.allSlots);
     }
-    
+
 
     /*
      *  Transfer an inventory into a storage container.
      */
 
-    private void transferInventory(List<Slot> inventory,List<Slot> storage){
+    private void transferInventory(List<Slot> inventory, List<Slot> storage)
+    {
 
-        foreach(Slot slot in inventory){
-            
-            if(slot.IsEmpty)
+        foreach (Slot slot in inventory)
+        {
+
+            if (slot.IsEmpty)
                 continue;
 
             var item = slot.itemInstance;
 
-            if(IsItemInStorage(item,storage))
-                if(item.settings_Inventory.Stackable){
-                    
+            if (IsItemInStorage(item, storage))
+                if (item.settings_Inventory.Stackable)
+                {
+
                     int maxAmount = item.settings_Inventory.StackSize;
-                    
+
                     // Search storage for stacks
-                    
-                    foreach(Slot storageSlot in storage){
-                        
+
+                    foreach (Slot storageSlot in storage)
+                    {
+
                         var stack = storageSlot.itemInstance;
-                        
-                        if(storageSlot.IsEmpty)
+
+                        if (storageSlot.IsEmpty)
                             continue;
-                            
-                        if(stack.UniqueName != item.UniqueName)
+
+                        if (stack.UniqueName != item.UniqueName)
                             continue;
-                            
-                        if(item.Amount + stack.Amount > maxAmount){
+
+                        if (item.Amount + stack.Amount > maxAmount)
+                        {
 
                             item.Amount -= maxAmount - stack.Amount;
-                            
+
                             //  Incase we moved whole stack
-                            
-                            if(item.Amount > 0)
+
+                            if (item.Amount > 0)
                                 slot.RefreshComponents();
                             else
                                 slot.Reset();
@@ -100,36 +111,43 @@ public class QuickStackInventory : Mod {
                             stack.Amount = maxAmount;
                             storageSlot.RefreshComponents();
 
-                        } else {
-                        
+                        }
+                        else
+                        {
+
                             stack.Amount += item.Amount;
                             storageSlot.RefreshComponents();
                             slot.Reset();
-                        
+
                             break;
                         }
                     }
-                    
-                    
+
+
                     //If all stacks are full find empty space to place it
-                    
-                    if(!slot.IsEmpty){
-                        
-                        Slot empty = FindEmptySlot(storageSlots);
-                        
-                        if(empty){
+
+                    if (!slot.IsEmpty)
+                    {
+
+                        Slot empty = FindEmptySlot(storage);
+
+                        if (empty)
+                        {
                             empty.SetItem(item);
                             slot.Reset();
                         }
                     }
-                    
-                } else {
-                    
+
+                }
+                else
+                {
+
                     //  Non stackable items
-                
-                    Slot empty = FindEmptySlot(storageSlots);
-                    
-                    if(empty){
+
+                    Slot empty = FindEmptySlot(storage);
+
+                    if (empty)
+                    {
                         empty.SetItem(item);
                         slot.Reset();
                     }
@@ -137,31 +155,33 @@ public class QuickStackInventory : Mod {
         }
     }
 
-    
+
     /*
      *  Check storage contains item
      */
-    
-    public Boolean IsItemInStorage(ItemInstance item,List<Slot> slots){
 
-        foreach(Slot slot in slots)
-            if(!slot.IsEmpty && slot.itemInstance.UniqueName == item.UniqueName)
+    public Boolean IsItemInStorage(ItemInstance item, List<Slot> slots)
+    {
+
+        foreach (Slot slot in slots)
+            if (!slot.IsEmpty && slot.itemInstance.UniqueName == item.UniqueName)
                 return true;
-        
+
         return false;
     }
 
-    
+
     /*
      *  Find next empty slot
      */
-    
-    public Slot FindEmptySlot(List<Slot> inventory){
-        
-        foreach(Slot item in inventory)
-            if(item.IsEmpty)
+
+    public Slot FindEmptySlot(List<Slot> inventory)
+    {
+
+        foreach (Slot item in inventory)
+            if (item.IsEmpty)
                 return item;
-        
+
         return null;
     }
 }
